@@ -235,7 +235,6 @@ const buildCart = (cartIndex: number) => {
         prefabId: "cube_01",
         y: 0,
         z: 16,
-
         scale: 0.5,
         scaleZ: 0.1,
         material: CART_MATERIAL,
@@ -245,15 +244,14 @@ const buildCart = (cartIndex: number) => {
   return cart;
 };
 
-export const createTrain = (numberOfCarts: number) => {
+export const createTrain = (options?: { numberOfCarts?: number }) => {
   // Locomotive
+  const { numberOfCarts = 0 } = options ?? {};
   const locomotive = createLocomotive(
     CART_SPACING + CART_SPACING * numberOfCarts
   );
 
-  return (
-    create()
-      // .add(locomotive)
-      .addMany(numberOfCarts, (index) => buildCart(index))
-  );
+  return create()
+    .add(locomotive)
+    .addMany(numberOfCarts, (index) => buildCart(index));
 };

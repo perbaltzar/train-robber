@@ -20,7 +20,7 @@ export const createWaterTower = (options?: {
             scale: 0.3,
             y: 0,
             scaleY: 3.75,
-            dealDamageOnTouch: { knockbackStrengthInProcent: 70, amount: 999 },
+            dealDamageOnTouch: { knockbackStrengthInProcent: 200, amount: 999 },
           })
         )
         .add(

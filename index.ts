@@ -4,20 +4,22 @@ import { createGround } from "./create/ground";
 import { createRail } from "./create/rail";
 import { createScenery } from "./create/scenery";
 import { createTrain } from "./create/train";
+import { createTunnel } from "./create/tunnel";
 import { createWaterTower } from "./create/waterTower";
 
-const forceStop = false;
+const forceStop = true;
 
 const world = create({ y: -10 });
-const train = createTrain(10);
+const train = createTrain({ numberOfCarts: 1 });
 const rail = createRail(300);
+const tunnel = createTunnel({ intensity: 10, forceStop });
 const ground = createGround({ duration: GROUND_DURATION, forceStop });
 const waterTower = createWaterTower({ intensity: 0, forceStop });
 const cactus = createScenery({
-  cactiIntensity: 7,
+  cactiIntensity: 1,
   numberOfPlanes: 12,
   rockIntensity: 1,
-  cliffIntensity: 3,
+  cliffIntensity: 1,
 });
 
 const scene: Scene = {
@@ -25,6 +27,7 @@ const scene: Scene = {
   environment: "sunrise_01",
 };
 
+tunnel.addTo(world);
 cactus.addTo(ground);
 rail.addTo(ground);
 waterTower.addTo(world);

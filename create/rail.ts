@@ -23,7 +23,7 @@ export const createRail = (length: number) => {
     rotY: 90,
   }).addTo(railPiece);
 
-  const rail = create({ x: 0, y: 2, z: 0 }).addMany(length, (index) => {
+  const rail = create({ x: -200, y: 2, z: 0 }).addMany(length, (index) => {
     const railPiece = create({ x: index * 2 }).addMany(2, (index) =>
       create({
         y: 0.2,
