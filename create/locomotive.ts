@@ -1,21 +1,85 @@
-import { create, materials } from "@hiberworld/code-kit";
-import { CART_MATERIAL, LOCOMOTIVE_HIGHLIGHT_MATERIAL } from "./train";
+import { create } from "@hiberworld/code-kit";
+import {
+  CART_MATERIAL,
+  LOCOMOTIVE_CABIN_MATERIAL,
+  LOCOMOTIVE_HIGHLIGHT_MATERIAL,
+} from "./train";
 
 export const createLocomotive = (x: number) => {
-  const train = create({ x, rotY: 180 });
-  // Floor
-  create({
-    y: 3,
-    z: -1.6,
-    x: -12,
+  const train = create({ x });
 
-    scaleX: 1,
-    scaleY: 0.8,
-    scaleZ: 0.1,
-    rotX: 90,
-    prefabId: "en_m_primitive_wall_01",
-    material: CART_MATERIAL,
-  }).addTo(train);
+  // Cabin
+  const cabin = create({ x: -1, y: 1 });
+  // Floor
+
+  // Windows
+  cabin
+    // Floor
+    .add(
+      create({
+        y: 3,
+        z: -1.6,
+        x: -11,
+        scaleX: 1,
+        scaleY: 0.8,
+        scaleZ: 0.1,
+        rotX: 90,
+        prefabId: "en_m_primitive_wall_01",
+        material: CART_MATERIAL,
+      })
+    )
+    // Windows
+    .addMany(2, (index) =>
+      create({
+        prefabId: "en_m_primitive_window_01",
+        scale: 0.5,
+        scaleZ: 0.1,
+        y: 3.6,
+        x: -10,
+        z: -1.4 + index * 3.1,
+        material: LOCOMOTIVE_CABIN_MATERIAL,
+      })
+    )
+
+    // Walls
+    .addMany(2, (index) =>
+      create({
+        y: 3,
+        z: -1.4 + index * 3.1,
+        x: -11,
+        scaleX: 1,
+        scaleY: 0.2,
+        scaleZ: 0.1,
+        prefabId: "en_m_primitive_wall_01",
+        material: LOCOMOTIVE_CABIN_MATERIAL,
+      })
+    )
+    .add(
+      create({
+        y: 3,
+        z: 0,
+        x: -8.9,
+        rotY: 90,
+        scaleX: 0.8,
+        scaleY: 0.65,
+        scaleZ: 0.1,
+        prefabId: "en_m_primitive_wall_01",
+        material: LOCOMOTIVE_CABIN_MATERIAL,
+      })
+    )
+    .addMany(2, (index) =>
+      create({
+        prefabId: "quarter_cylinder",
+        y: 5.5,
+        z: 1 - index * 2,
+        x: -11,
+        rotY: 0 + 180 * index,
+        scaleX: 2,
+        scaleZ: 1,
+        scaleY: 0.2,
+        material: CART_MATERIAL,
+      })
+    );
 
   // Cylinder
   create()
@@ -40,6 +104,9 @@ export const createLocomotive = (x: number) => {
         scaleY: 1.5,
         rotY: 90,
       })
+    )
+    .addMany(10, () =>
+      create({ prefabId: "fx_particlesystem_smoke_01", y: 10, x: -1 })
     )
     .add(
       create({
@@ -99,7 +166,6 @@ export const createLocomotive = (x: number) => {
         scaleY: 0.6,
         rotY: 90,
         rotZ: -90,
-        // rotZ: -90 - 180 * index,
       })
     )
     .addMany(3, (index) =>
@@ -115,7 +181,6 @@ export const createLocomotive = (x: number) => {
         rotY: 90,
         rotZ: -90,
         rotX: 90,
-        // rotZ: -90 - 180 * index,
       })
     )
     .addMany(3, (index) =>
@@ -232,17 +297,19 @@ export const createLocomotive = (x: number) => {
         prefabId: "cube_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
       })
+    )
+    .add(
+      create({
+        prefabId: "cube_01",
+        material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
+        y: 3.5,
+        x: -0.5,
+        scale: 0.5,
+        scaleY: 0.3,
+        scaleX: 2,
+      })
     );
-  return train.addMany(2, (index) =>
-    create({
-      y: 3,
-      z: -1.4 + index * 3.1,
-      x: -12,
-      scaleX: 1,
-      scaleY: 0.3,
-      scaleZ: 0.1,
-      prefabId: "en_m_primitive_wall_01",
-      material: CART_MATERIAL,
-    })
-  );
+
+  cabin.addTo(train);
+  return train;
 };

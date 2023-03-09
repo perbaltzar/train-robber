@@ -5,6 +5,7 @@ import { createLocomotive } from "./locomotive";
 export const CART_MATERIAL: Material = "palette_01_black";
 export const CART_SPACING = 22;
 export const LOCOMOTIVE_HIGHLIGHT_MATERIAL: Material = "palette_02_red";
+export const LOCOMOTIVE_CABIN_MATERIAL: Material = "palette_02_blue";
 
 const cartColors: Material[] = ["t_planks_02"];
 
@@ -248,7 +249,7 @@ export const createTrain = (options?: { numberOfCarts?: number }) => {
   // Locomotive
   const { numberOfCarts = 0 } = options ?? {};
   const locomotive = createLocomotive(
-    CART_SPACING + CART_SPACING * numberOfCarts
+    CART_SPACING + CART_SPACING * numberOfCarts - 14
   );
 
   return create()
