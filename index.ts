@@ -10,12 +10,12 @@ import { createWaterTower } from "./create/waterTower";
 const forceStop = true;
 
 const world = create({ y: -10 });
-const train = createTrain({ numberOfCarts: 1 });
+const train = createTrain({ numberOfCarts: 0 });
 const rail = createRail(300);
-const tunnel = createTunnel({ intensity: 10, forceStop });
+const tunnel = createTunnel({ intensity: 0, forceStop });
 const ground = createGround({ duration: GROUND_DURATION, forceStop });
 const waterTower = createWaterTower({ intensity: 0, forceStop });
-const cactus = createScenery({
+const scenery = createScenery({
   cactiIntensity: 1,
   numberOfPlanes: 12,
   rockIntensity: 1,
@@ -28,7 +28,7 @@ const scene: Scene = {
 };
 
 tunnel.addTo(world);
-cactus.addTo(ground);
+scenery.addTo(ground);
 rail.addTo(ground);
 waterTower.addTo(world);
 

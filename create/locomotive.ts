@@ -1,8 +1,8 @@
-import { create } from "@hiberworld/code-kit";
+import { create, materials } from "@hiberworld/code-kit";
 import { CART_MATERIAL, LOCOMOTIVE_HIGHLIGHT_MATERIAL } from "./train";
 
 export const createLocomotive = (x: number) => {
-  const train = create({ x });
+  const train = create({ x, rotY: 180 });
   // Floor
   create({
     y: 3,
@@ -135,7 +135,7 @@ export const createLocomotive = (x: number) => {
   create({ y: 3.3, z: -1.5, x: -3 })
     .add(
       create({
-        y: -1,
+        y: -0.96,
         scale: 2,
         prefabId: "en_p_wooden_wheel_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
@@ -147,7 +147,7 @@ export const createLocomotive = (x: number) => {
   create({ y: 3.3, z: -1.5, x: -5.5 })
     .add(
       create({
-        y: -1,
+        y: -0.96,
         scale: 2,
         prefabId: "en_p_wooden_wheel_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
@@ -159,7 +159,7 @@ export const createLocomotive = (x: number) => {
   create({ y: 3.3, z: -1.5, x: -8 })
     .add(
       create({
-        y: -1,
+        y: -0.96,
         scale: 2,
         prefabId: "en_p_wooden_wheel_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
@@ -171,7 +171,7 @@ export const createLocomotive = (x: number) => {
   create({ y: 3.3, z: 1.5, x: -3 })
     .add(
       create({
-        y: -1,
+        y: -0.96,
         scale: 2,
         prefabId: "en_p_wooden_wheel_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
@@ -183,7 +183,7 @@ export const createLocomotive = (x: number) => {
   create({ y: 3.3, z: 1.5, x: -5.5 })
     .add(
       create({
-        y: -1,
+        y: -0.96,
         scale: 2,
         prefabId: "en_p_wooden_wheel_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
@@ -195,7 +195,7 @@ export const createLocomotive = (x: number) => {
   create({ y: 3.3, z: 1.5, x: -8 })
     .add(
       create({
-        y: -1,
+        y: -0.96,
         scale: 2,
         prefabId: "en_p_wooden_wheel_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
@@ -205,6 +205,34 @@ export const createLocomotive = (x: number) => {
     .animate({ rotZ: [0, -180, -360] }, { loop: "RESTART", easing: "LINEAR" })
     .addTo(train);
 
+  // FRONT PIECE
+  const angles = [29, 45, 59, 68, 59, 45, 29];
+  const lengths = [1.13, 1.15, 1.4, 1.85, 1.4, 1.15, 1.13];
+  train
+    .addMany(2, (index) =>
+      create({
+        x: 3,
+        z: -0.8 + index * 1.6,
+        y: 2.5,
+        rotY: 60 - index * 120,
+        scale: 0.1,
+        scaleZ: 1.7,
+        prefabId: "cube_01",
+        material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
+      })
+    )
+    .addMany(7, (index) =>
+      create({
+        x: 1,
+        y: 4,
+        rotZ: angles[index],
+        rotX: 225 - 15 * index,
+        scale: 0.1,
+        scaleY: lengths[index],
+        prefabId: "cube_01",
+        material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
+      })
+    );
   return train.addMany(2, (index) =>
     create({
       y: 3,
