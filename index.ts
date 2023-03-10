@@ -10,17 +10,25 @@ import { createWaterTower } from "./create/waterTower";
 const forceStop = false;
 
 const world = create({ y: -10 });
-const train = createTrain({ numberOfCarts: 12 });
-const rail = createRail(300);
-const tunnel = createTunnel({ intensity: 4, forceStop });
+const train = createTrain({
+  numberOfCarts: 17,
+  cargoCarts: [0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1],
+  checkPoints: [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+});
+const rail = createRail(400);
+const tunnel = createTunnel({ intensity: 8, forceStop });
 const ground = createGround({ duration: GROUND_DURATION, forceStop });
-const waterTower = createWaterTower({ intensity: 14, forceStop });
-const spawnPoint = create({ prefabId: "gpl_spawn_point_01", y: 7.5, rotY: 90 });
+const waterTower = createWaterTower({ intensity: 8, forceStop });
+const spawnPoint = create({
+  prefabId: "gpl_spawn_point_01",
+  y: 7.3,
+  rotY: -90,
+});
 const scenery = createScenery({
-  cactiIntensity: 3,
+  cactiIntensity: 1,
   numberOfPlanes: 12,
   rockIntensity: 3,
-  cliffIntensity: 4,
+  cliffIntensity: 3,
 });
 
 const scene: Scene = {
