@@ -85,7 +85,7 @@ export const createLocomotive = (x: number) => {
   create()
     .add(
       create({
-        y: 5,
+        y: 4.7,
         rotZ: 90,
         scale: 1,
         scaleY: 5,
@@ -93,58 +93,63 @@ export const createLocomotive = (x: number) => {
         material: CART_MATERIAL,
       })
     )
+
     // Chimney
     .add(
-      create({
-        prefabId: "cylinder_01",
-        material: CART_MATERIAL,
-        y: 6,
-        x: -1,
-        scale: 0.5,
-        scaleY: 1.5,
-        rotY: 90,
-      })
+      create({ y: -0.5 })
+        .add(
+          create({
+            prefabId: "cylinder_01",
+            material: CART_MATERIAL,
+            y: 6,
+            x: -1,
+            scale: 0.5,
+            scaleY: 1.5,
+            rotY: 90,
+          })
+        )
+        .addMany(10, () =>
+          create({ prefabId: "fx_particlesystem_smoke_01", y: 10, x: -1 })
+        )
+        .add(
+          create({
+            prefabId: "cone",
+            material: CART_MATERIAL,
+            y: 9,
+            x: -1,
+            scale: 1,
+            rotZ: 180,
+          })
+        )
+        .add(
+          create({
+            prefabId: "en_p_plant_pot_dirt_01",
+            material: CART_MATERIAL,
+            y: 10,
+            x: -1,
+            scale: 4,
+            scaleY: 2,
+            rotZ: 180,
+          })
+        )
+        .add(
+          create({
+            prefabId: "torus_thin_01",
+            material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
+            y: 8.9,
+            x: -1,
+            scale: 1.2,
+          })
+        )
     )
-    .addMany(10, () =>
-      create({ prefabId: "fx_particlesystem_smoke_01", y: 10, x: -1 })
-    )
-    .add(
-      create({
-        prefabId: "cone",
-        material: CART_MATERIAL,
-        y: 9,
-        x: -1,
-        scale: 1,
-        rotZ: 180,
-      })
-    )
-    .add(
-      create({
-        prefabId: "en_p_plant_pot_dirt_01",
-        material: CART_MATERIAL,
-        y: 10,
-        x: -1,
-        scale: 4,
-        scaleY: 2,
-        rotZ: 180,
-      })
-    )
-    .add(
-      create({
-        prefabId: "torus_thin_01",
-        material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
-        y: 8.9,
-        x: -1,
-        scale: 1.2,
-      })
-    )
+
     // Rings on engine
     .addMany(6, (index) =>
       create({
         prefabId: "torus_thin_01",
         material: LOCOMOTIVE_HIGHLIGHT_MATERIAL,
         rotZ: 90,
-        y: 5,
+        y: 4.7,
         x: 0.1 - (index * 2 - (index % 2) * 0.5),
         scale: 1.1,
         scaleY: 0.9,
@@ -311,5 +316,15 @@ export const createLocomotive = (x: number) => {
     );
 
   cabin.addTo(train);
+
+  train.add(
+    create({
+      y: 5.6,
+      scale: 1.2,
+      x: -4,
+      prefabId: "goal_01",
+      goal: { dummy: true },
+    })
+  );
   return train;
 };

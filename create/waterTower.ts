@@ -6,9 +6,10 @@ export const createWaterTower = (options?: {
   forceStop?: boolean;
 }) => {
   const quantity = options?.intensity ? options?.intensity * 2 : 0;
-  const spacing = (WORLD_LENGTH * 60) / quantity;
+  // const spacing = (WORLD_LENGTH * (59.9 + quantity * 0.1)) / quantity;
+  const spacing = (WORLD_LENGTH * 60 * 2) / quantity;
 
-  return create()
+  return create({ y: 0 })
     .addMany(quantity, (index) =>
       create({ z: 6, y: 8, x: 0 + index * spacing })
         .add(
@@ -92,10 +93,10 @@ export const createWaterTower = (options?: {
         )
     )
     .animate(
-      { x: options?.forceStop ? [0, 0] : [-240, -840] },
+      { x: options?.forceStop ? [0, 0] : [-0, (-60 * WORLD_LENGTH) / 2] },
       {
         easing: "LINEAR",
-        duration: GROUND_DURATION * 10,
+        duration: (GROUND_DURATION * WORLD_LENGTH) / 2,
         loop: "RESTART",
       }
     );

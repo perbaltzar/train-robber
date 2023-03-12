@@ -1,4 +1,5 @@
 import { create, renderScene, Scene } from "@hiberworld/code-kit";
+import { addOmnipresentSound } from "./audio/addOmnipresentSound";
 import { GROUND_DURATION } from "./constants";
 import { createGround } from "./create/ground";
 import { createRail } from "./create/rail";
@@ -16,16 +17,17 @@ const train = createTrain({
   checkPoints: [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
 });
 const rail = createRail(400);
-const tunnel = createTunnel({ intensity: 8, forceStop });
+const tunnel = createTunnel({ intensity: 4, forceStop });
 const ground = createGround({ duration: GROUND_DURATION, forceStop });
-const waterTower = createWaterTower({ intensity: 8, forceStop });
+const waterTower = createWaterTower({ intensity: 12, forceStop });
 const spawnPoint = create({
   prefabId: "gpl_spawn_point_01",
-  y: 7.3,
+  y: 3.5,
+  x: -4,
   rotY: -90,
 });
 const scenery = createScenery({
-  cactiIntensity: 1,
+  cactiIntensity: 3,
   numberOfPlanes: 12,
   rockIntensity: 3,
   cliffIntensity: 3,
@@ -33,7 +35,7 @@ const scenery = createScenery({
 
 const scene: Scene = {
   root: world,
-  environment: "sunrise_01",
+  environment: "midday_01",
 };
 
 tunnel.addTo(world);
@@ -44,6 +46,7 @@ spawnPoint.addTo(world);
 
 train.addTo(world);
 world.add(ground);
+addOmnipresentSound(train, "a_am_automated_factory_01");
 
 await renderScene(scene);
 // setMovementMode("AIRWALK");

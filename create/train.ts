@@ -20,29 +20,72 @@ const logMaterials: Material[] = [
 const cartColors: Material[] = ["t_planks_02"];
 
 const createWheel = (index: number, z: number) => {
-  return (
-    create({ y: 0.5, scale: 1 })
-      // .animate({ rotX: [0, 180, 360] }, { easing: "LINEAR", loop: "RESTART" })
-      .add(
-        create({
-          prefabId: "en_p_wooden_wheel_01",
-          material: CART_MATERIAL,
-          // y: -2,
-          y: -0.5,
-          z,
-          x: -1.5 + index * RAIL_WIDTH,
-          scale: 0.9,
-        })
-      )
+  return create({ y: 0.5, scale: 1 }).add(
+    create().add(
+      create({
+        prefabId: "en_p_wooden_wheel_01",
+        material: CART_MATERIAL,
+        // y: -2,
+        y: -0.5,
+        z,
+        x: -1.5 + index * RAIL_WIDTH,
+        scale: 0.9,
+      })
+    )
   );
 };
 
 const createWheelPiece = (z: number) => {
   const piece = create({ z });
   piece
-    .addMany(2, (index) => createWheel(index, 0))
-    .addMany(2, (index) => createWheel(index, 1))
-    .addMany(2, (index) => createWheel(index, 2))
+    .addMany(2, (index) =>
+      create({
+        scale: 0.9,
+        y: 0.5,
+        z: 0,
+        x: -1.5 + index * RAIL_WIDTH,
+      })
+        .add(
+          create({
+            y: -0.48,
+            prefabId: "en_p_wooden_wheel_01",
+            material: CART_MATERIAL,
+          })
+        )
+        .animate({ rotX: [0, 180, 360] }, { easing: "LINEAR", loop: "RESTART" })
+    )
+    .addMany(2, (index) =>
+      create({
+        scale: 0.9,
+        y: 0.5,
+        z: 1,
+        x: -1.5 + index * RAIL_WIDTH,
+      })
+        .add(
+          create({
+            y: -0.48,
+            prefabId: "en_p_wooden_wheel_01",
+            material: CART_MATERIAL,
+          })
+        )
+        .animate({ rotX: [0, 180, 360] }, { easing: "LINEAR", loop: "RESTART" })
+    )
+    .addMany(2, (index) =>
+      create({
+        scale: 0.9,
+        y: 0.5,
+        z: 2,
+        x: -1.5 + index * RAIL_WIDTH,
+      })
+        .add(
+          create({
+            y: -0.48,
+            prefabId: "en_p_wooden_wheel_01",
+            material: CART_MATERIAL,
+          })
+        )
+        .animate({ rotX: [0, 180, 360] }, { easing: "LINEAR", loop: "RESTART" })
+    )
     .addMany(2, (index) =>
       create({
         prefabId: "cube_01",
@@ -250,12 +293,39 @@ const buildCart = (
       create({
         prefabId: "cube_01",
         y: 0,
-        z: 16,
+        z: 14.5,
         scale: 0.5,
         scaleZ: 0.1,
         material: CART_MATERIAL,
       })
     );
+
+  // Ladder
+  cart.add(
+    create({
+      prefabId: "en_m_wooden_stairs_01",
+      y: 1,
+      z: -4.2,
+      x: 1.2,
+      material: CART_MATERIAL,
+      rotY: 180,
+      scaleY: 0.8,
+      scaleX: 0.3,
+      scaleZ: 0.5,
+    })
+  );
+
+  cart.add(
+    create({
+      prefabId: "cube_01",
+      y: 0.9,
+      z: -5,
+      scaleZ: 1.5,
+      scaleY: 0.1,
+      scaleX: 1.8,
+      material: CART_MATERIAL,
+    })
+  );
 
   if (options?.hasCheckpoint) {
     cart.add(create({ prefabId: "checkpoint_01", y: 1, z: 5 }));
@@ -272,6 +342,20 @@ const buildCart = (
   }
 
   if (!options?.hasCheckpoint) {
+    // Ladder
+    cart.add(
+      create({
+        prefabId: "en_m_wooden_stairs_01",
+        y: 1,
+        z: -4.2,
+        x: 1.2,
+        material: CART_MATERIAL,
+        rotY: 180,
+        scaleY: 0.8,
+        scaleX: 0.3,
+        scaleZ: 0.5,
+      })
+    );
     cart.addMany(2, (index) =>
       create({
         prefabId: "iron_cage_01_door",
@@ -372,7 +456,7 @@ const buildCargoCart = (cartIndex: number) => {
       create({
         prefabId: "cube_01",
         y: 0,
-        z: 16,
+        z: 14.5,
         scale: 0.5,
         scaleZ: 0.1,
         material: CART_MATERIAL,
