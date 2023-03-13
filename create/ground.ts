@@ -13,7 +13,7 @@ export const createGround = (opt?: {
         prefabId: "plane_01",
         x: -200 + 60 * index,
         z: -(Z_PLANES * 30) + 60 * i2,
-        dealDamageOnTouch: { amount: 999 },
+        // dealDamageOnTouch: { amount: 999 },
         scaleX: 1,
         scaleZ: 1,
         material: "t_rocky_sand_01",

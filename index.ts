@@ -35,7 +35,7 @@ const scenery = createScenery({
 
 const scene: Scene = {
   root: world,
-  environment: "midday_01",
+  environment: "sunrise_01",
 };
 
 tunnel.addTo(world);
@@ -49,4 +49,3 @@ world.add(ground);
 addOmnipresentSound(train, "a_am_automated_factory_01");
 
 await renderScene(scene);
-// setMovementMode("AIRWALK");

@@ -19,23 +19,7 @@ const logMaterials: Material[] = [
 
 const cartColors: Material[] = ["t_planks_02"];
 
-const createWheel = (index: number, z: number) => {
-  return create({ y: 0.5, scale: 1 }).add(
-    create().add(
-      create({
-        prefabId: "en_p_wooden_wheel_01",
-        material: CART_MATERIAL,
-        // y: -2,
-        y: -0.5,
-        z,
-        x: -1.5 + index * RAIL_WIDTH,
-        scale: 0.9,
-      })
-    )
-  );
-};
-
-const createWheelPiece = (z: number) => {
+export const createWheelPiece = (z: number) => {
   const piece = create({ z });
   piece
     .addMany(2, (index) =>
@@ -478,7 +462,7 @@ export const createTrain = (options?: {
     checkPoints = [],
   } = options ?? {};
   const locomotive = createLocomotive(
-    CART_SPACING + CART_SPACING * numberOfCarts - 14
+    CART_SPACING + CART_SPACING * numberOfCarts - 2
   );
 
   for (let i = 1; i < numberOfCarts; i++) {
