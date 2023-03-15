@@ -13,8 +13,8 @@ const forceStop = false;
 const world = create({ y: -10 });
 const train = createTrain({
   numberOfCarts: 17,
-  cargoCarts: [0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1],
-  checkPoints: [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  cargoCarts: [0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1],
+  checkPoints: [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
 });
 const rail = createRail(400);
 const tunnel = createTunnel({ intensity: 4, forceStop });

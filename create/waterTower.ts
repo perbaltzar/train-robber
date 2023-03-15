@@ -9,7 +9,7 @@ export const createWaterTower = (options?: {
   // const spacing = (WORLD_LENGTH * (59.9 + quantity * 0.1)) / quantity;
   const spacing = (WORLD_LENGTH * 60 * 2) / quantity;
 
-  return create({ y: 0 })
+  return create({ y: -0.1 })
     .addMany(quantity, (index) =>
       create({ z: 6, y: 8, x: 0 + index * spacing })
         .add(

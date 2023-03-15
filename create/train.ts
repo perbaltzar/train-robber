@@ -402,7 +402,7 @@ const buildCargoCart = (cartIndex: number) => {
     return create().addMany(haveThreeLogs ? 3 : 4, (index) =>
       create({
         prefabId: "cylinder_01",
-        y: 1.5 + logRow * 0.8,
+        y: 1.6 + logRow * 0.8,
         z: -3 + logRow * 0.4,
         x: (haveThreeLogs ? -0.8 : -1.25) + index * 0.8,
         scale: 0.46,

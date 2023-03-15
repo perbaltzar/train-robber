@@ -8,13 +8,15 @@ export const createTunnel = (options?: {
   const quantity = options?.intensity ? options?.intensity * 2 : 0;
   const spacing = (WORLD_LENGTH * 60) / quantity;
 
-  const tunnel = create({ y: 0.5 })
+  const tunnel = create({ y: 0.7 })
     .addMany(quantity, (index) =>
       create({ x: 10 + index * spacing })
+        // Deadly part of tunnel
         .addMany(2, (index) =>
           create({
             prefabId: "quarter_pipe_wall_01",
             scale: 2,
+            scaleY: 0.5,
             z: -2 + index * 4,
             y: 7,
             rotY: 180 + 90 * index,
@@ -25,12 +27,37 @@ export const createTunnel = (options?: {
         .addMany(2, (index) =>
           create({
             y: 1,
-            x: 2,
+            x: 0.5,
             z: -2.4 + 7.2 * index,
             scale: 1,
+            scaleX: 0.25,
             scaleZ: 0.8,
             prefabId: "en_m_primitive_wall_01",
             dealDamageOnTouch: { amount: 999 },
+          })
+        )
+        // Non-Deadly part of tunnel
+        .addMany(2, (index) =>
+          create({
+            prefabId: "quarter_pipe_wall_01",
+            scale: 2,
+            scaleY: 3,
+            z: -2 + index * 4,
+            x: 1,
+            y: 7,
+            rotY: 180 + 90 * index,
+            rotZ: -90,
+          })
+        )
+        .addMany(2, (index) =>
+          create({
+            y: 1,
+            x: 4,
+            z: -2.4 + 7.2 * index,
+            scale: 1,
+            scaleX: 1.5,
+            scaleZ: 0.8,
+            prefabId: "en_m_primitive_wall_01",
           })
         )
         .add(
