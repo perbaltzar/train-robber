@@ -454,6 +454,8 @@ export const createTrain = (options?: {
   numberOfCarts?: number;
   cargoCarts?: (1 | 0)[];
   checkPoints?: (1 | 0)[];
+  z?: number;
+  x?: number;
 }) => {
   // Locomotive
   const {
@@ -474,7 +476,7 @@ export const createTrain = (options?: {
     }
   }
 
-  return create()
+  return create({ z: options?.z ?? 0, x: options?.x ?? 0 })
     .add(locomotive)
     .addMany(numberOfCarts, (index) => {
       if (cargoCarts[index]) {

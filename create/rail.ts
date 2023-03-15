@@ -1,7 +1,7 @@
 import { create } from "@hiberworld/code-kit";
 import { RAIL_WIDTH } from "../constants";
 
-export const createRail = (length: number) => {
+export const createRail = (length: number, z?: number) => {
   const railPiece = create().addMany(2, (index) =>
     create({
       y: 0.2,
@@ -23,7 +23,7 @@ export const createRail = (length: number) => {
     rotY: 90,
   }).addTo(railPiece);
 
-  const rail = create({ x: -200, y: 2, z: 0 }).addMany(length, (index) => {
+  const rail = create({ x: -200, y: 2, z: z ?? 0 }).addMany(length, (index) => {
     const railPiece = create({ x: index * 2 }).addMany(2, (index) =>
       create({
         y: 0.2,
